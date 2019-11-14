@@ -28,16 +28,16 @@ it('should know when has been gotHit', () => {
 it('should ignore repeated hits on the same place', () => {
   const horzShip = new Ship({ length: 2, pos: [0, 0] });
 
-  horzShip.bombAt(0, 0);
+  horzShip.setDamage(0, 0);
   expect(horzShip.hits.length).toBe(1);
 
-  horzShip.bombAt(0, 0);
+  horzShip.setDamage(0, 0);
   expect(horzShip.hits.length).toBe(1);
 
-  horzShip.bombAt(0, 0);
+  horzShip.setDamage(0, 0);
   expect(horzShip.hits.length).toBe(1);
 
-  horzShip.bombAt(1, 0);
+  horzShip.setDamage(1, 0);
   expect(horzShip.hits.length).toBe(2);
 });
 
@@ -45,40 +45,40 @@ it('should know when it was sunk', () => {
   const horzShip = new Ship({ length: 2, pos: [0, 0] });
   expect(horzShip.isSunk()).toBe(false);
 
-  horzShip.bombAt(0, 0);
+  horzShip.setDamage(0, 0);
   expect(horzShip.isSunk()).toBe(false);
 
-  horzShip.bombAt(0, 0);
+  horzShip.setDamage(0, 0);
   expect(horzShip.isSunk()).toBe(false);
 
-  horzShip.bombAt(0, 0);
+  horzShip.setDamage(0, 0);
   expect(horzShip.isSunk()).toBe(false);
 
-  horzShip.bombAt(1, 0);
+  horzShip.setDamage(1, 0);
   expect(horzShip.isSunk()).toBe(true);
 
   const vertShip = new Ship({ length: 5, pos: [3, 4], vertical: true });
   expect(vertShip.isSunk()).toBe(false);
 
-  vertShip.bombAt(3, 4);
+  vertShip.setDamage(3, 4);
   expect(vertShip.isSunk()).toBe(false);
 
-  vertShip.bombAt(3, 4);
+  vertShip.setDamage(3, 4);
   expect(vertShip.isSunk()).toBe(false);
 
-  vertShip.bombAt(3, 4);
+  vertShip.setDamage(3, 4);
   expect(vertShip.isSunk()).toBe(false);
 
-  vertShip.bombAt(3, 5);
+  vertShip.setDamage(3, 5);
   expect(vertShip.isSunk()).toBe(false);
 
-  vertShip.bombAt(3, 6);
+  vertShip.setDamage(3, 6);
   expect(vertShip.isSunk()).toBe(false);
 
-  vertShip.bombAt(3, 7);
+  vertShip.setDamage(3, 7);
   expect(vertShip.isSunk()).toBe(false);
 
-  vertShip.bombAt(3, 8);
+  vertShip.setDamage(3, 8);
   expect(vertShip.isSunk()).toBe(true);
 });
 

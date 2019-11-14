@@ -22,7 +22,7 @@ export default class Ship {
     return (ofs >= 0) && (ofs < this.length);
   }
 
-  (x, y) {
+  setDamage(x, y) {
     if (this.gotHit(x, y)) {
       const cell = x + y * globals.BOARD_SIZE;
       if (!this.hits.includes(cell)) this.hits.push(cell);
