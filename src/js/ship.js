@@ -1,3 +1,5 @@
+import * as globals from './globals';
+
 export default class Ship {
   constructor({ length, pos: [x, y], vertical = false }) {
     this.length = length;
@@ -20,9 +22,9 @@ export default class Ship {
     return (ofs >= 0) && (ofs < this.length);
   }
 
-  bombAt(x, y) {
+  (x, y) {
     if (this.gotHit(x, y)) {
-      const cell = x + y * 10;
+      const cell = x + y * globals.BOARD_SIZE;
       if (!this.hits.includes(cell)) this.hits.push(cell);
     }
   }
