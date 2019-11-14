@@ -7,6 +7,14 @@ export default class Ship {
     this.hits = [];
   }
 
+  getCoordinates() {
+    const coordinates = [];
+    for (let i = 0; i < this.length; i += 1) {
+      coordinates.push(this.vertical ? [this.x, this.y + i] : [this.x + i, this.y]);
+    }
+    return coordinates;
+  }
+
   gotHit(x, y) {
     const ofs = this.vertical ? y - this.y : x - this.x;
     return (ofs >= 0) && (ofs < this.length);
