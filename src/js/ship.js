@@ -8,14 +8,17 @@ export default class Ship {
     this.vertical = vertical;
     this.hits = [];
     this.isShip = true;
+    this._coord = null;
   }
 
   getCoordinates() {
-    const coordinates = [];
-    for (let i = 0; i < this.length; i += 1) {
-      coordinates.push(this.vertical ? [this.x, this.y + i] : [this.x + i, this.y]);
+    if (!this._coord) {
+      this._coord = [];
+      for (let i = 0; i < this.length; i += 1) {
+        this._coord.push(this.vertical ? [this.x, this.y + i] : [this.x + i, this.y]);
+      }
     }
-    return coordinates;
+    return this._coord;
   }
 
   gotHit(x, y) {
