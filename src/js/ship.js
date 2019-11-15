@@ -37,4 +37,8 @@ export default class Ship {
   isSunk() {
     return this.hits.length === this.length;
   }
+
+  toString() {
+    return `Ship[${this.length}] @ (${this.x}, ${this.y}); damage: ${this.damage}`;
+  }
 }
