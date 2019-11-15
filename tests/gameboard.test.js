@@ -45,3 +45,20 @@ it('sould record an attack correcttly', () => {
   expect(ship.damage).toEqual(2);
   expect(gameboard.isHit(1, 0)).toBe(true);
 });
+
+it('Should detect when all ships have sunk', () => {
+  const gameboard = new Gameboard(config.BOARD_SIZE);
+  gameboard.placeShip({ length: 2, pos: [0, 0] });
+  gameboard.placeShip({ length: 3, pos: [9, 7], vertical: true });
+
+  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(1, 0);
+  expect(gameboard.allSunk()).toBe(false);
+
+  gameboard.receiveAttack(9, 7);
+  gameboard.receiveAttack(9, 9);
+  expect(gameboard.allSunk()).toBe(false);
+
+  gameboard.receiveAttack(9, 8);
+  expect(gameboard.allSunk()).toBe(true);
+});
