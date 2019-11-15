@@ -14,10 +14,14 @@ it('should place a ship at specific coordinate', () => {
   expect(gameboard.board).toEqual(expectedBoard);
   expect(gameboard.board[10]).toBe('');
 });
+
 it('should validate if a place is available for a ship', () => {
   const gameboard = new Gameboard(globals.BOARD_SIZE);
   const shipOptions = { length: globals.SHIP_SIZES[0], pos: [0, 0] };
   expect(gameboard.canPlaceShip(shipOptions)).toBe(true);
   gameboard.placeShip(shipOptions);
   expect(gameboard.canPlaceShip(shipOptions)).toBe(false);
+
+  expect(gameboard.canPlaceShip({ length: 5, pos: [9, 9], vertical: true })).toBe(false);
+  expect(gameboard.canPlaceShip({ length: 5, pos: [9, 0] })).toBe(false);
 });

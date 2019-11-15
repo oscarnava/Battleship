@@ -8,7 +8,9 @@ export default class Gameboard {
 
   canPlaceShip(options) {
     const ship = new Ship(options);
-    return !ship.getCoordinates().find(([x, y]) => this.board[x + globals.BOARD_SIZE * y] !== '');
+    if (ship.x < 0 || ship.y < 0) return false;
+
+    return !ship.getCoordinates().find(([x, y]) => (x >= globals.BOARD_SIZE) || (y >= globals.BOARD_SIZE) || (this.board[x + globals.BOARD_SIZE * y] !== ''));
   }
 
   placeShip(options) {
