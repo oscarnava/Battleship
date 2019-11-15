@@ -55,6 +55,10 @@ export default class Gameboard {
     }
   }
 
+  allSunk() {
+    return !this.ships.find((ship) => !ship.isSunk());
+  }
+
   toString() {
     let str = '';
     for (let y = 0; y < this.boardSize; y += 1) {
