@@ -1,4 +1,4 @@
-import * as globals from './globals';
+import * as config from './config';
 
 export default class Ship {
   constructor({ length, pos: [x, y], vertical = false }) {
@@ -7,6 +7,7 @@ export default class Ship {
     this.y = y;
     this.vertical = vertical;
     this.hits = [];
+    this.isShip = true;
   }
 
   getCoordinates() {
@@ -24,9 +25,13 @@ export default class Ship {
 
   setDamage(x, y) {
     if (this.gotHit(x, y)) {
-      const cell = x + y * globals.BOARD_SIZE;
+      const cell = x + y * config.BOARD_SIZE;
       if (!this.hits.includes(cell)) this.hits.push(cell);
     }
+  }
+
+  get damage() {
+    return this.hits.length;
   }
 
   isSunk() {
