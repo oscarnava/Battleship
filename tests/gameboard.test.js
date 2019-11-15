@@ -62,3 +62,25 @@ it('Should detect when all ships have sunk', () => {
   gameboard.receiveAttack(9, 8);
   expect(gameboard.allSunk()).toBe(true);
 });
+
+it('Should validate a move', () => {
+  const gameboard = new Gameboard(config.BOARD_SIZE);
+  gameboard.placeShip({ length: 2, pos: [0, 0] });
+  expect(gameboard.isValidMove(0, 0)).toBe(true);
+  gameboard.receiveAttack(0, 0);
+  expect(gameboard.isValidMove(0, 0)).toBe(false);
+  expect(gameboard.isValidMove(3, 0)).toBe(true);
+  gameboard.receiveAttack(3, 0);
+  expect(gameboard.isValidMove(3, 0)).toBe(false);
+});
+
+it('Should return an array of valid moves', () => {
+  const gameboard = new Gameboard(3);
+  expect(gameboard.validMoves).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+  gameboard.placeShip({ length: 2, pos: [0, 0] });
+  expect(gameboard.validMoves).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+  gameboard.receiveAttack(0, 0);
+  expect(gameboard.validMoves).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+  gameboard.receiveAttack(2, 0);
+  expect(gameboard.validMoves).toEqual([1, 3, 4, 5, 6, 7, 8]);
+});

@@ -9,6 +9,7 @@ export default class Gameboard {
     this.boardSize = boardSize;
     this.ships = [];
     this.board = Array.from({ length: this.boardSize }, () => Array(this.boardSize).fill(WATER));
+    this.validMoves = Array.from({ length: this.boardSize * this.boardSize }, (v, i) => i);
   }
 
   getCell(x, y) {
@@ -45,6 +46,14 @@ export default class Gameboard {
     return this.board[x][y] === MISS;
   }
 
+  isShip(x, y) {
+    return !!this.board[x][y].isShip;
+  }
+
+  isValidMove(x, y) {
+    return this.isWater(x, y) || this.isShip(x, y);
+  }
+
   receiveAttack(x, y) {
     const cell = this.board[x][y];
     if (cell.isShip) {
@@ -53,6 +62,7 @@ export default class Gameboard {
     } else {
       this.board[x][y] = MISS;
     }
+    this.validMoves = this.validMoves.filter((pos) => pos !== y * this.boardSize + x);
   }
 
   allSunk() {
