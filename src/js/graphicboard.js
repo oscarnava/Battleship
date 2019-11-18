@@ -7,7 +7,6 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 let boatImages;
-// const boatImages = [new Image(), new Image(), new Image(), new Image()];
 
 const loadBoats = async () => {
   const imgs = ['2', '3', '4', '5'];
@@ -54,7 +53,6 @@ export default class GraphicBoard {
     this.board.forEachShip((ship) => {
       const { length, x, y } = ship;
       const imgShip = getShipImage(length);
-      console.log('draw', imgShip.src)
       ctx.drawImage(
         imgShip,
         x * config.CELL_SIZE + config.MARGIN,
