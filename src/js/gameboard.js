@@ -1,3 +1,4 @@
+import { BOARD_SIZE } from './config';
 import Ship from './ship';
 
 const WATER = '.';
@@ -5,7 +6,7 @@ const HIT = 'H';
 const MISS = 'X';
 
 export default class Gameboard {
-  constructor(boardSize) {
+  constructor(boardSize = BOARD_SIZE) {
     this.boardSize = boardSize;
     this.ships = [];
     this.board = Array.from({ length: this.boardSize }, () => Array(this.boardSize).fill(WATER));
