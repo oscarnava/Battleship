@@ -17,6 +17,10 @@ export default class Gameboard {
     return this.board[x][y];
   }
 
+  forEachShip(fn) {
+    this.ships.forEach(fn);
+  }
+
   getStrategicMove(strategyFn) {
     const validMoves = this.validMoves
       .map((position) => (

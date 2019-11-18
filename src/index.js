@@ -9,7 +9,11 @@ player1.placeShip({ length: 4, pos: [2, 2], vertical: true });
 const humanBoard = new GraphicBoard(player1, 10, 20);
 
 const setupGame = () => {
-  humanBoard.drawBoard();
+  setTimeout(
+    () => {
+      humanBoard.draw();
+    }, 1000,
+  );
 };
 
 const run = () => {
