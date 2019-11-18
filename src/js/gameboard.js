@@ -16,6 +16,14 @@ export default class Gameboard {
     return this.board[x][y];
   }
 
+  randomValidMove(randFn = Math.random) {
+    const randPos = Math.floor(randFn() * this.validMoves.length);
+    const position = this.validMoves[randPos];
+    const x = position % this.boardSize;
+    const y = Math.floor(position / this.boardSize);
+    return { x, y };
+  }
+
   canPlaceShip(options) {
     const ship = new Ship(options);
     if (ship.x < 0 || ship.y < 0) return false;
