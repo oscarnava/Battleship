@@ -4,20 +4,18 @@ import GraphicBoard from './js/graphicboard';
 
 const player1 = new Gameboard();
 player1.placeShip({ length: 5, pos: [0, 0] });
-player1.placeShip({ length: 4, pos: [2, 2], vertical: true });
+player1.placeShip({ length: 4, pos: [2, 2] });
+player1.placeShip({ length: 2, pos: [5, 5] });
+player1.placeShip({ length: 3, pos: [0, 6] });
 
 const humanBoard = new GraphicBoard(player1, 10, 20);
 
-const setupGame = () => {
-  setTimeout(
-    () => {
-      humanBoard.draw();
-    }, 1000,
-  );
+const setupGame = async () => {
+  await humanBoard.draw();
 };
 
-const run = () => {
-  setupGame();
+const run = async () => {
+  await setupGame();
 };
 
 run();

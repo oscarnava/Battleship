@@ -5,13 +5,25 @@ const CLIPART_PATH = './clipart';
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-const boatImages = [new Image(), new Image(), new Image(), new Image()];
+let boatImages;
+// const boatImages = [new Image(), new Image(), new Image(), new Image()];
 
 const loadBoats = async () => {
-  boatImages.forEach((img, index) => { img.src = `${CLIPART_PATH}/ship-${index + 2}.svg`; });
+  const imgs = ['2', '3', '4', '5'];
+  return Promise.all(
+    imgs.map((img) => fetch(`${CLIPART_PATH}/ship-${img}.svg`)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const img = new Image();
+        img.src = URL.createObjectURL(blob);
+        return img;
+      })),
+  );
 };
 
-const getShipImage = (size) => boatImages[size - 2];
+const getShipImage = (size) => {
+  return boatImages[size - 2];
+};
 
 export default class GraphicBoard {
   constructor(board, left, top, blind = false) {
@@ -43,8 +55,9 @@ export default class GraphicBoard {
   drawShips() {
     this.board.forEachShip((ship) => {
       const { length, x, y } = ship;
+      const imgShip = getShipImage(length);
       ctx.drawImage(
-        getShipImage(length),
+        imgShip,
         x * config.CELL_SIZE + config.MARGIN,
         y * config.CELL_SIZE + config.MARGIN,
         length * config.CELL_SIZE - 2 * config.MARGIN,
@@ -54,7 +67,7 @@ export default class GraphicBoard {
   }
 
   async draw() {
-    await loadBoats();
+    boatImages = await loadBoats();
     this.drawBoard();
     this.drawShips();
   }
