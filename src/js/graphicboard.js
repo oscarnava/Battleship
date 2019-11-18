@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 import * as config from './config';
 
 const CLIPART_PATH = './clipart';
@@ -11,19 +12,16 @@ let boatImages;
 const loadBoats = async () => {
   const imgs = ['2', '3', '4', '5'];
   return Promise.all(
-    imgs.map((img) => fetch(`${CLIPART_PATH}/ship-${img}.svg`)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const img = new Image();
-        img.src = URL.createObjectURL(blob);
-        return img;
-      })),
+    imgs.map((img) => new Promise((resolve, reject) => {
+      const imgElement = new Image();
+      imgElement.src = `${CLIPART_PATH}/ship-${img}.svg`;
+      imgElement.onload = () => resolve(imgElement);
+      imgElement.onerror = () => reject(new Error('Could not load img'));
+    })),
   );
 };
 
-const getShipImage = (size) => {
-  return boatImages[size - 2];
-};
+const getShipImage = (size) => boatImages[size - 2];
 
 export default class GraphicBoard {
   constructor(board, left, top, blind = false) {
@@ -56,6 +54,7 @@ export default class GraphicBoard {
     this.board.forEachShip((ship) => {
       const { length, x, y } = ship;
       const imgShip = getShipImage(length);
+      console.log('draw', imgShip.src)
       ctx.drawImage(
         imgShip,
         x * config.CELL_SIZE + config.MARGIN,
