@@ -16,12 +16,12 @@ export default class Gameboard {
     return this.board[x][y];
   }
 
-  randomValidMove(randFn = Math.random) {
-    const randPos = Math.floor(randFn() * this.validMoves.length);
-    const position = this.validMoves[randPos];
-    const x = position % this.boardSize;
-    const y = Math.floor(position / this.boardSize);
-    return { x, y };
+  getStrategicMove(strategyFn) {
+    const validMoves = this.validMoves
+      .map((position) => (
+        { x: position % this.boardSize, y: Math.floor(position / this.boardSize) }
+      ));
+    return strategyFn(validMoves);
   }
 
   canPlaceShip(options) {

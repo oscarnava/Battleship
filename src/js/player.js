@@ -3,7 +3,12 @@ export default class Player {
     this.gameboard = gameboard;
   }
 
-  getMove(randFn = Math.random) {
-    return this.gameboard.randomValidMove(randFn);
+  // eslint-disable-next-line class-methods-use-this
+  strategy() {
+    return (moves) => moves[Math.floor(Math.random() * moves.length)];
+  }
+
+  getMove() {
+    return this.gameboard.getStrategicMove(this.strategy());
   }
 }
