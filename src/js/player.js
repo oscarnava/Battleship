@@ -4,11 +4,11 @@ export default class Player {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  strategy() {
-    return (moves) => moves[Math.floor(Math.random() * moves.length)];
+  strategy(moves) {
+    return moves[Math.floor(Math.random() * moves.length)];
   }
 
   getMove() {
-    return this.gameboard.getStrategicMove(this.strategy());
+    return this.gameboard.getStrategicMove(this.strategy.bind(this));
   }
 }
