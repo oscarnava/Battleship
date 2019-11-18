@@ -2,7 +2,7 @@ import * as config from '../src/js/config';
 import Gameboard from '../src/js/gameboard';
 import Player from '../src/js/player';
 
-it.only('should play a valid move', () => {
+it('should play a valid move', () => {
   const gameboard = new Gameboard(config.BOARD_SIZE);
   const player = new Player(gameboard);
   player.strategy = (moves) => moves[0];
