@@ -37,12 +37,13 @@ export default class GraphicBoard {
     this.board = board;
     this.left = left;
     this.top = top;
-    this.size = board.boardSize * config.CELL_SIZE;
     this.blind = blind;
     this.size = board.boardSize * config.CELL_SIZE;
+    this.size = board.boardSize * config.CELL_SIZE;
+    this.editMode = false;
 
     this.onMouseMove((x, y) => {
-      if (this.board.isValidMove(x, y)) {
+      if (this.editMode || this.board.isValidMove(x, y)) {
         canvas.style.cursor = 'crosshair';
       } else {
         canvas.style.cursor = 'not-allowed';
@@ -67,31 +68,40 @@ export default class GraphicBoard {
     }
   }
 
+  drawShip(ship, alpha = 1.0, x = ship.x, y = ship.y) {
+    const { length, vertical } = ship;
+    const imgShip = getShipImage(length);
+    const left = this.left + x * config.CELL_SIZE;
+    const top = this.top + y * config.CELL_SIZE;
+    const width = length * config.CELL_SIZE - 2 * config.MARGIN;
+    const height = config.CELL_SIZE - 2 * config.MARGIN;
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+
+    if (this.editMode) {
+      ctx.rect(this.left, this.top, this.size, this.size);
+      ctx.stroke();
+      ctx.clip();
+    }
+
+    if (vertical) {
+      ctx.translate(left + config.CELL_SIZE, top);
+      ctx.rotate(Math.PI / 2);
+      ctx.drawImage(imgShip, config.MARGIN, config.MARGIN, width, height);
+    } else {
+      ctx.drawImage(imgShip, left + config.MARGIN, top + config.MARGIN, width, height);
+    }
+    ctx.restore();
+  }
+
   drawShips() {
     this.board.forEachShip((ship) => {
       if (this.blind && !ship.isSunk()) {
-        // return;
-        ctx.globalAlpha = 0.1;
-      }
-
-      const { length, x, y, vertical } = ship;
-      const imgShip = getShipImage(length);
-      const left = this.left + x * config.CELL_SIZE;
-      const top = this.top + y * config.CELL_SIZE;
-      const width = length * config.CELL_SIZE - 2 * config.MARGIN;
-      const height = config.CELL_SIZE - 2 * config.MARGIN;
-
-      if (vertical) {
-        ctx.save();
-        ctx.translate(left + config.CELL_SIZE, top);
-        ctx.rotate(Math.PI / 2);
-        ctx.drawImage(imgShip, config.MARGIN, config.MARGIN, width, height);
-        ctx.restore();
+        this.drawShip(ship, 0.1);
       } else {
-        ctx.drawImage(imgShip, left + config.MARGIN, top + config.MARGIN, width, height);
+        this.drawShip(ship);
       }
-
-      ctx.globalAlpha = 1.0;
     });
   }
 
@@ -141,7 +151,7 @@ export default class GraphicBoard {
 
   onClick(callback) {
     canvas.addEventListener('click', (event) => {
-      if (this.board.allSunk()) return;
+      if (this.editMode || this.board.allSunk()) return;
 
       this.mouseEvent(event, callback);
     });
@@ -149,5 +159,17 @@ export default class GraphicBoard {
 
   onMouseMove(callback) {
     canvas.addEventListener('mousemove', (event) => this.mouseEvent(event, callback));
+  }
+
+  onMouseDown(callback) {
+    canvas.addEventListener('mousedown', (event) => this.mouseEvent(event, callback));
+  }
+
+  onMouseUp(callback) {
+    canvas.addEventListener('mouseup', (event) => this.mouseEvent(event, callback));
+  }
+
+  onDblClick(callback) {
+    canvas.addEventListener('dblclick', (event) => this.mouseEvent(event, callback));
   }
 }

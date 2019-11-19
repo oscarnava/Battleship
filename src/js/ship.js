@@ -41,6 +41,22 @@ export default class Ship {
     return this.hits.length === this.length;
   }
 
+  moveTo(x, y) {
+    this.x = x;
+    this.y = y;
+    this._coord = null;
+  }
+
+  turn() {
+    this.vertical = !this.vertical;
+    this._coord = null;
+  }
+
+  reset() {
+    this._coord = null;
+    return this;
+  }
+
   placeRandom(board) {
     this.x = Math.floor(Math.random() * (board.boardSize - this.length + 1));
     this.y = Math.floor(Math.random() * (board.boardSize - this.length + 1));
