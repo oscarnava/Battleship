@@ -42,8 +42,15 @@ export default class GraphicBoard {
     this.size = board.boardSize * config.CELL_SIZE;
     this.editMode = false;
 
+    let lastX = -1;
+    let lastY = -1;
     this.onMouseMove((x, y) => {
-      if (this.editMode || this.board.isValidMove(x, y)) {
+      if (x === lastX && y === lastY) return;
+
+      lastX = x;
+      lastY = y;
+
+      if (!this.board.allSunk() && (this.editMode || this.board.isValidMove(x, y))) {
         canvas.style.cursor = 'crosshair';
       } else {
         canvas.style.cursor = 'not-allowed';

@@ -11,7 +11,6 @@ let humanDisplay;
 let computerDisplay;
 let draggedShip;
 let dragOpts;
-const gameOver = false;
 
 const playMove = (x, y, graphBoard) => {
   const game = graphBoard.board;
@@ -26,8 +25,6 @@ const playMove = (x, y, graphBoard) => {
 };
 
 const executeMove = (x, y, cell, graphBoard) => {
-  if (gameOver) return;
-
   if (graphBoard.board.isValidMove(x, y)) {
     if (!playMove(x, y, graphBoard)) {
       for (;;) {
@@ -53,7 +50,7 @@ const grabShip = (x, y, ship, graphBoard) => {
 };
 
 const moveShip = (x, y, cell, graphBoard) => {
-  if (!draggedShip || (dragOpts.x === x && dragOpts.y === y)) return;
+  if (!draggedShip || (dragOpts.pos[0] === x && dragOpts.pos[1] === y)) return;
 
   const game = graphBoard.board;
   graphBoard.draw();
