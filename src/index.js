@@ -18,18 +18,23 @@ const playMove = (x, y, graphBoard) => {
   game.receiveAttack(x, y);
   if (game.isHit(x, y)) {
     graphBoard.draw();
-  } else {
-    graphBoard.drawMiss(x, y);
+    return true;
   }
+
+  graphBoard.drawMiss(x, y);
+  return false;
 };
 
 const executeMove = (x, y, cell, graphBoard) => {
   if (gameOver) return;
 
   if (graphBoard.board.isValidMove(x, y)) {
-    playMove(x, y, graphBoard);
-    const { x: cx, y: cy } = computer.getMove();
-    playMove(cx, cy, humanDisplay);
+    if (!playMove(x, y, graphBoard)) {
+      for (;;) {
+        const { x: cx, y: cy } = computer.getMove();
+        if (!playMove(cx, cy, humanDisplay)) break;
+      }
+    }
     humanDisplay.editMode = false;
   }
 };
