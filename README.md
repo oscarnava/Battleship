@@ -10,4 +10,4 @@ Browser based version of the board game [Battle Ships](https://en.wikipedia.org/
 ### Assignment link
 - [Project: Battleship](https://www.theodinproject.com/courses/javascript/lessons/battleship)
 
-<!-- ### [Live preview]() -->
+### [Live preview](https://oscarnava.github.io/battleship/)
