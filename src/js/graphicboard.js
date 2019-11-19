@@ -11,7 +11,7 @@ let boatImages;
 const loadBoats = async () => {
   const imgs = ['splash', 'explosion', 'ship-2', 'ship-3', 'ship-4', 'ship-5'];
   return Promise.all(
-    imgs.map((img) => new Promise((resolve, reject) => {
+    imgs.map(img => new Promise((resolve, reject) => {
       const imgElement = new Image();
       imgElement.src = `${CLIPART_PATH}/${img}.svg`;
       imgElement.onload = () => resolve(imgElement);
@@ -20,7 +20,7 @@ const loadBoats = async () => {
   );
 };
 
-const getShipImage = (size) => boatImages[size];
+const getShipImage = size => boatImages[size];
 
 const drawIcon = (icon, left, top, x, y) => {
   ctx.drawImage(
@@ -159,18 +159,18 @@ export default class GraphicBoard {
   }
 
   onMouseMove(callback) {
-    canvas.addEventListener('mousemove', (event) => this.mouseEvent(event, callback));
+    canvas.addEventListener('mousemove', event => this.mouseEvent(event, callback));
   }
 
   onMouseDown(callback) {
-    canvas.addEventListener('mousedown', (event) => this.mouseEvent(event, callback));
+    canvas.addEventListener('mousedown', event => this.mouseEvent(event, callback));
   }
 
   onMouseUp(callback) {
-    canvas.addEventListener('mouseup', (event) => this.mouseEvent(event, callback));
+    canvas.addEventListener('mouseup', event => this.mouseEvent(event, callback));
   }
 
   onDblClick(callback) {
-    canvas.addEventListener('dblclick', (event) => this.mouseEvent(event, callback));
+    canvas.addEventListener('dblclick', event => this.mouseEvent(event, callback));
   }
 }
