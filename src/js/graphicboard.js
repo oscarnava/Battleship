@@ -11,7 +11,7 @@ let boatImages;
 const loadBoats = async () => {
   const imgs = ['2', '3', '4', '5'];
   return Promise.all(
-    imgs.map((img) => new Promise((resolve, reject) => {
+    imgs.map(img => new Promise((resolve, reject) => {
       const imgElement = new Image();
       imgElement.src = `${CLIPART_PATH}/ship-${img}.svg`;
       imgElement.onload = () => resolve(imgElement);
@@ -20,7 +20,7 @@ const loadBoats = async () => {
   );
 };
 
-const getShipImage = (size) => boatImages[size - 2];
+const getShipImage = size => boatImages[size - 2];
 
 export default class GraphicBoard {
   constructor(board, left, top, blind = false) {
