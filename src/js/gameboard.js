@@ -47,6 +47,12 @@ export default class Gameboard {
     return ship;
   }
 
+  removeShip(ship) {
+    ship.getCoordinates().forEach(([x, y]) => {
+      this.board[x][y] = WATER;
+    });
+  }
+
   isWater(x, y) {
     return this.board[x][y] === WATER;
   }
