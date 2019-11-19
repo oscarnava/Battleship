@@ -70,6 +70,7 @@ export default class GraphicBoard {
   drawShips() {
     this.board.forEachShip((ship) => {
       if (this.blind && !ship.isSunk()) {
+        // return;
         ctx.globalAlpha = 0.1;
       }
 

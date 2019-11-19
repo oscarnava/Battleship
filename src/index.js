@@ -2,24 +2,40 @@ import * as config from './js/config';
 
 import Gameboard from './js/gameboard';
 import GraphicBoard from './js/graphicboard';
+import Player from './js/player';
 
-const executeMove = (x, y, cell, board) => {
-  const game = board.board;
-  if (game.isValidMove(x, y)) {
-    game.receiveAttack(x, y);
-    if (game.isHit(x, y)) {
-      board.draw();
-    } else {
-      board.drawMiss(x, y);
-    }
+let computer;
+let humanGame;
+let computerGame;
+let humanDisplay;
+let computerDisplay;
+const gameOver = false;
+
+const playMove = (x, y, graphBoard) => {
+  const game = graphBoard.board;
+  game.receiveAttack(x, y);
+  if (game.isHit(x, y)) {
+    graphBoard.draw();
+  } else {
+    graphBoard.drawMiss(x, y);
+  }
+};
+
+const executeMove = (x, y, cell, graphBoard) => {
+  if (gameOver) return;
+
+  if (graphBoard.board.isValidMove(x, y)) {
+    playMove(x, y, graphBoard);
+    const { x: cx, y: cy } = computer.getMove();
+    playMove(cx, cy, humanDisplay);
   }
 };
 
 const setupGame = () => {
-  const humanGame = new Gameboard();
-  const computerGame = new Gameboard();
-  const humanDisplay = new GraphicBoard(humanGame, 20, 20);
-  const computerDisplay = new GraphicBoard(
+  humanGame = new Gameboard();
+  computerGame = new Gameboard();
+  humanDisplay = new GraphicBoard(humanGame, 20, 20);
+  computerDisplay = new GraphicBoard(
     computerGame,
     humanDisplay.left,
     humanDisplay.top + humanDisplay.size + 20,
@@ -32,13 +48,14 @@ const setupGame = () => {
       computerGame.placeShip({ length: size, pos: [idx, 0], vertical: true });
     });
 
+  computer = new Player(humanGame);
+
   humanGame.shuffleShips();
   computerGame.shuffleShips();
 
   humanDisplay.draw();
   computerDisplay.draw();
 
-  // humanDisplay.onClick(executeMove);
   computerDisplay.onClick(executeMove);
 };
 
