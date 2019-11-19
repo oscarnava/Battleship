@@ -1,21 +1,21 @@
+import * as config from './js/config';
+
 import Gameboard from './js/gameboard';
 import GraphicBoard from './js/graphicboard';
-// import Ship from './js/ship';
 
-const player1 = new Gameboard();
-player1.placeShip({ length: 5, pos: [0, 0] });
-player1.placeShip({ length: 4, pos: [2, 2] });
-player1.placeShip({ length: 2, pos: [5, 5] });
-player1.placeShip({ length: 3, pos: [0, 6] });
+const humanGame = new Gameboard();
 
-const humanBoard = new GraphicBoard(player1, 10, 20);
+config.SHIP_SIZES
+  .forEach((size, idx) => humanGame.placeShip({ length: size, pos: [idx, 0], vertical: true }));
 
-const setupGame = async () => {
-  await humanBoard.draw();
+const humanDisplay = new GraphicBoard(humanGame, 20, 20);
+
+const setupGame = () => {
+  humanDisplay.draw();
 };
 
-const run = async () => {
-  await setupGame();
+const run = () => {
+  setupGame();
 };
 
 run();

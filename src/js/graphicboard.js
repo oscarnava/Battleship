@@ -7,7 +7,6 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 let boatImages;
-// const boatImages = [new Image(), new Image(), new Image(), new Image()];
 
 const loadBoats = async () => {
   const imgs = ['2', '3', '4', '5'];
@@ -33,35 +32,37 @@ export default class GraphicBoard {
   }
 
   drawBoard() {
-    ctx.fillStyle = 'lightblue';
+    ctx.fillStyle = config.OCEAN_COLOR;
     ctx.fillRect(this.left, this.top, this.size, this.size);
 
-    ctx.strokeStyle = 'gray';
-    for (let x = 0; x <= this.size; x += config.CELL_SIZE) {
-      ctx.moveTo(this.left + x, this.top);
-      ctx.lineTo(this.left + x, this.top + this.size);
+    ctx.strokeStyle = config.GRID_COLOR;
+    for (let i = 0; i <= this.size; i += config.CELL_SIZE) {
+      ctx.moveTo(this.left + i, this.top);
+      ctx.lineTo(this.left + i, this.top + this.size);
       ctx.stroke();
-    }
-
-    for (let y = 0; y <= this.size; y += config.CELL_SIZE) {
-      ctx.moveTo(this.left, this.top + y);
-      ctx.lineTo(this.left + this.size, this.top + y);
+      ctx.moveTo(this.left, this.top + i);
+      ctx.lineTo(this.left + this.size, this.top + i);
       ctx.stroke();
     }
   }
 
   drawShips() {
     this.board.forEachShip((ship) => {
-      const { length, x, y } = ship;
+      const { length, x, y, vertical } = ship;
       const imgShip = getShipImage(length);
-      console.log('draw', imgShip.src)
-      ctx.drawImage(
-        imgShip,
-        x * config.CELL_SIZE + config.MARGIN,
-        y * config.CELL_SIZE + config.MARGIN,
-        length * config.CELL_SIZE - 2 * config.MARGIN,
-        config.CELL_SIZE - 2 * config.MARGIN,
-      );
+      const left = this.left + x * config.CELL_SIZE;
+      const top = this.top + y * config.CELL_SIZE;
+      const width = length * config.CELL_SIZE - 2 * config.MARGIN;
+      const height = config.CELL_SIZE - 2 * config.MARGIN;
+      if (vertical) {
+        ctx.save();
+        ctx.translate(left + config.CELL_SIZE, top);
+        ctx.rotate(Math.PI / 2);
+        ctx.drawImage(imgShip, config.MARGIN, config.MARGIN, width, height);
+        ctx.restore();
+      } else {
+        ctx.drawImage(imgShip, left + config.MARGIN, top + config.MARGIN, width, height);
+      }
     });
   }
 
