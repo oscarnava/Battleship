@@ -5,7 +5,7 @@ import Player from '../src/js/player';
 it('should play a valid move', () => {
   const gameboard = new Gameboard(config.BOARD_SIZE);
   const player = new Player(gameboard);
-  player.strategy = moves => moves[0];
+  player.strategy = (moves) => moves[0];
 
   for (let row = 0; row < config.BOARD_SIZE; row += 1) {
     for (let col = 0; col < config.BOARD_SIZE; col += 1) {
