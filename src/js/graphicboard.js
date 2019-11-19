@@ -9,24 +9,25 @@ const ctx = canvas.getContext('2d');
 let boatImages;
 
 const loadBoats = async () => {
-  const imgs = ['2', '3', '4', '5'];
+  const imgs = ['splash', 'explosion', 'ship-2', 'ship-3', 'ship-4', 'ship-5'];
   return Promise.all(
     imgs.map((img) => new Promise((resolve, reject) => {
       const imgElement = new Image();
-      imgElement.src = `${CLIPART_PATH}/ship-${img}.svg`;
+      imgElement.src = `${CLIPART_PATH}/${img}.svg`;
       imgElement.onload = () => resolve(imgElement);
       imgElement.onerror = () => reject(new Error('Could not load img'));
     })),
   );
 };
 
-const getShipImage = (size) => boatImages[size - 2];
+const getShipImage = (size) => boatImages[size];
 
 export default class GraphicBoard {
   constructor(board, left, top, blind = false) {
     this.board = board;
     this.left = left;
     this.top = top;
+    this.size = board.boardSize * config.CELL_SIZE;
     this.blind = blind;
     this.size = board.boardSize * config.CELL_SIZE;
   }
@@ -67,8 +68,8 @@ export default class GraphicBoard {
   }
 
   async draw() {
-    boatImages = await loadBoats();
     this.drawBoard();
+    if (!boatImages) boatImages = await loadBoats();
     this.drawShips();
   }
 }
