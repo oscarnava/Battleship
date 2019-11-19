@@ -146,6 +146,7 @@ export default class GraphicBoard {
     const y = Math.floor((clientY - this.top - top) / config.CELL_SIZE);
     if (x >= 0 && y >= 0 && x < this.board.boardSize && y < this.board.boardSize) {
       callback(x, y, this.board.getCell(x, y), this);
+      event.preventDefault();
     }
   }
 
