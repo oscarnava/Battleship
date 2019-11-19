@@ -30,7 +30,7 @@ export default class Gameboard {
   }
 
   canPlaceShip(options) {
-    const ship = new Ship(options);
+    const ship = options.isShip ? options : new Ship(options);
     if (ship.x < 0 || ship.y < 0) return false;
 
     return !ship
@@ -39,7 +39,7 @@ export default class Gameboard {
   }
 
   placeShip(options) {
-    const ship = new Ship(options);
+    const ship = options.isShip ? options : new Ship(options);
     this.ships.push(ship);
     ship.getCoordinates().forEach(([x, y]) => {
       this.board[x][y] = ship;
@@ -86,6 +86,17 @@ export default class Gameboard {
 
   allSunk() {
     return !this.ships.find((ship) => !ship.isSunk());
+  }
+
+  shuffleShips() {
+    this.ships.forEach((ship) => {
+      this.removeShip(ship);
+      ship.placeRandom(this);
+      while (!this.canPlaceShip(ship)) {
+        ship.placeRandom(this);
+      }
+      this.placeShip(ship);
+    });
   }
 
   toString() {

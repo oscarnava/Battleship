@@ -41,6 +41,13 @@ export default class Ship {
     return this.hits.length === this.length;
   }
 
+  placeRandom(board) {
+    this.x = Math.floor(Math.random() * (board.boardSize - this.length + 1));
+    this.y = Math.floor(Math.random() * (board.boardSize - this.length + 1));
+    this.vertical = Math.random() >= 0.5;
+    this._coord = null;
+  }
+
   toString() {
     return `Ship[${this.length}] @ (${this.x}, ${this.y}); damage: ${this.damage}`;
   }
