@@ -4,7 +4,7 @@ const MARGIN = 3;
 const OCEAN_COLOR = '#beebe9';
 const GRID_COLOR = '#4b8e8d';
 
-const SHIP_SIZES = [5, 4, 4, 3, 3, 3, 2, 2, 2, 2];
+const SHIP_SIZES = [5, 4, 3, 3, 2, 2, 2];
 
 export {
   BOARD_SIZE,
