@@ -99,6 +99,15 @@ export default class Gameboard {
     });
   }
 
+  forEachMove(callback) {
+    for (let x = 0; x < this.boardSize; x += 1) {
+      for (let y = 0; y < this.boardSize; y += 1) {
+        if (this.isHit(x, y)) callback(x, y, true);
+        if (this.isMiss(x, y)) callback(x, y, false);
+      }
+    }
+  }
+
   toString() {
     let str = '';
     for (let y = 0; y < this.boardSize; y += 1) {
