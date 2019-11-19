@@ -98,7 +98,7 @@ export default class GraphicBoard {
   drawShips() {
     this.board.forEachShip((ship) => {
       if (this.blind && !ship.isSunk()) {
-        this.drawShip(ship, 0.1);
+        this.drawShip(ship, 0.0);
       } else {
         this.drawShip(ship);
       }
