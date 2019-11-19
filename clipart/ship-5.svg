@@ -5,35 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="51.507126mm"
    height="9.7849159mm"
    viewBox="0 0 51.507126 9.7849159"
    version="1.1"
-   id="svg836"
-   sodipodi:docname="ship-5.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1680"
-     inkscape:window-height="988"
-     id="namedview8"
-     showgrid="false"
-     inkscape:zoom="1.7927536"
-     inkscape:cx="97.336301"
-     inkscape:cy="18.49118"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg836" />
+   id="svg836">
   <defs
      id="defs830" />
   <metadata
@@ -51,7 +27,7 @@
   <path
      id="rect814"
      d="M 8.3051596,0.094303 H 47.901809 l 3.521321,0.949231 0.084,7.84765 -3.605321,0.7747304 H 8.3051596 L 4.073671,8.3026788 0.00867701,4.8278977 2.4013601,2.807779 Z"
-     style="opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+     style="opacity:1;vector-effect:none;fill:#a8b8d5;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   <g
      style="fill:#010101;fill-opacity:1;stroke:none;stroke-opacity:1"
      id="layer1"
