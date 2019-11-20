@@ -3,6 +3,7 @@ import * as config from './js/config';
 import Gameboard from './js/gameboard';
 import GraphicBoard from './js/graphicboard';
 import Player from './js/player';
+import playSound from './js/sound';
 
 let computer;
 let humanGame;
@@ -17,10 +18,12 @@ const playMove = (x, y, graphBoard) => {
   game.receiveAttack(x, y);
   if (game.isHit(x, y)) {
     graphBoard.draw();
+    playSound('explosion');
     return true;
   }
 
   graphBoard.drawMiss(x, y);
+  playSound('splash');
   return false;
 };
 
