@@ -5,9 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Battleships</title>
+  <style>
+      * {
+        box-sizing: border-box;
+      }
+
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #022c43;
+      color: white;
+      font-size: 16px;
+    }
+
+    .main {
+      margin: 0 2rem;
+    }
+  </style>
 </head>
 <body>
-  <div>
+  <div class="main">
     <h1>Battleships</h1>
     <h2>Instructions:</h2>
     <ul>
@@ -16,7 +34,7 @@
       <li>Toggle the ship's orientation by double clicking on it.</li>
       <li>Start the game by initiating attack.</li>
     </ul>
-    <canvas id="canvas" width="500" height="1000"></canvas>
   </div>
+  <canvas id="canvas" width="1000" height="1000"></canvas>
 </body>
 </html>

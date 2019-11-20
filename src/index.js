@@ -99,8 +99,8 @@ const setupGame = () => {
   humanDisplay = new GraphicBoard(humanGame, 20, 20);
   computerDisplay = new GraphicBoard(
     computerGame,
-    humanDisplay.left,
-    humanDisplay.top + humanDisplay.size + 20,
+    humanDisplay.left + humanDisplay.size + 20,
+    humanDisplay.top,
     true,
   );
 

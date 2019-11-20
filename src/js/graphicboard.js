@@ -64,15 +64,20 @@ export default class GraphicBoard {
     ctx.fillStyle = config.OCEAN_COLOR;
     ctx.fillRect(this.left, this.top, this.size, this.size);
 
-    ctx.strokeStyle = config.GRID_COLOR;
-    for (let i = 0; i <= this.size; i += config.CELL_SIZE) {
+    for (let i = config.CELL_SIZE; i < this.size; i += config.CELL_SIZE) {
+      ctx.beginPath();
+      ctx.lineWidth = '2';
+      ctx.strokeStyle = config.GRID_COLOR;
       ctx.moveTo(this.left + i, this.top);
       ctx.lineTo(this.left + i, this.top + this.size);
-      ctx.stroke();
       ctx.moveTo(this.left, this.top + i);
       ctx.lineTo(this.left + this.size, this.top + i);
       ctx.stroke();
     }
+
+    ctx.strokeStyle = '#219897';
+    ctx.lineWidth = '4';
+    ctx.strokeRect(this.left - 2, this.top - 2, this.size + 4, this.size + 4);
   }
 
   drawShip(ship, alpha = 1.0, x = ship.x, y = ship.y) {
@@ -84,13 +89,14 @@ export default class GraphicBoard {
     const height = config.CELL_SIZE - 2 * config.MARGIN;
 
     ctx.save();
-    ctx.globalAlpha = alpha;
 
     if (this.editMode) {
+      ctx.lineWidth = '0';
       ctx.rect(this.left, this.top, this.size, this.size);
-      ctx.stroke();
       ctx.clip();
     }
+
+    ctx.globalAlpha = alpha;
 
     if (vertical) {
       ctx.translate(left + config.CELL_SIZE, top);
@@ -99,6 +105,7 @@ export default class GraphicBoard {
     } else {
       ctx.drawImage(imgShip, left + config.MARGIN, top + config.MARGIN, width, height);
     }
+
     ctx.restore();
   }
 
