@@ -1,0 +1,14 @@
+linters:
+  eslint:
+    config: .eslintrc.js
+    fixer: true
+
+files:
+  ignore:
+    - dist/*
+    - auxiliar/*
+    - .eslintrc.js
+    - webpack.config.js
+
+fixers:
+  enable: true
