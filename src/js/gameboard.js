@@ -2,8 +2,9 @@ import { BOARD_SIZE } from './config';
 import Ship from './ship';
 
 const WATER = '.';
-const HIT = 'H';
-const MISS = 'X';
+const HIT = '*';
+const MISS = 'x';
+const SUNK = '$';
 
 export default class Gameboard {
   constructor(boardSize = BOARD_SIZE) {
@@ -23,7 +24,7 @@ export default class Gameboard {
 
   getStrategicMove(strategyFn) {
     const validMoves = this.validMoves
-      .map(position => (
+      .map((position) => (
         { x: position % this.boardSize, y: Math.floor(position / this.boardSize) }
       ));
     return strategyFn(validMoves);
@@ -34,32 +35,36 @@ export default class Gameboard {
     if (ship.x < 0 || ship.y < 0) return false;
 
     return !ship
-      .getCoordinates()
+      .coordinates
       .find(([x, y]) => x >= this.boardSize || y >= this.boardSize || this.board[x][y] !== WATER);
   }
 
   placeShip(options) {
     const ship = options.isShip ? options.reset() : new Ship(options);
     this.ships.push(ship);
-    ship.getCoordinates().forEach(([x, y]) => {
+    ship.coordinates.forEach(([x, y]) => {
       this.board[x][y] = ship;
     });
     return ship;
   }
 
   removeShip(ship) {
-    ship.getCoordinates().forEach(([x, y]) => {
+    ship.coordinates.forEach(([x, y]) => {
       this.board[x][y] = WATER;
     });
-    this.ships = this.ships.filter(sh => sh !== ship);
+    this.ships = this.ships.filter((sh) => sh !== ship);
   }
 
   isWater(x, y) {
     return this.board[x][y] === WATER;
   }
 
+  isSunk(x, y) {
+    return this.board[x][y] === SUNK;
+  }
+
   isHit(x, y) {
-    return this.board[x][y] === HIT;
+    return this.board[x][y] === HIT || this.isSunk(x, y);
   }
 
   isMiss(x, y) {
@@ -75,18 +80,22 @@ export default class Gameboard {
   }
 
   receiveAttack(x, y) {
-    const cell = this.board[x][y];
-    if (cell.isShip) {
-      cell.setDamage(x, y);
-      this.board[x][y] = HIT;
+    const ship = this.board[x][y];
+    if (ship.isShip) {
+      ship.setDamage(x, y);
+      if (ship.isSunk) {
+        ship.coordinates.forEach(([col, row]) => { this.board[col][row] = SUNK; });
+      } else {
+        this.board[x][y] = HIT;
+      }
     } else {
       this.board[x][y] = MISS;
     }
-    this.validMoves = this.validMoves.filter(pos => pos !== y * this.boardSize + x);
+    this.validMoves = this.validMoves.filter((pos) => pos !== y * this.boardSize + x);
   }
 
   allSunk() {
-    return !this.ships.find(ship => !ship.isSunk());
+    return !this.ships.find((ship) => !ship.isSunk);
   }
 
   shuffleShips() {

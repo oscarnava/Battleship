@@ -37,7 +37,7 @@ export default class Ship {
     return this.hits.length;
   }
 
-  isSunk() {
+  get isSunk() {
     return this.hits.length === this.length;
   }
 

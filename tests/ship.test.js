@@ -43,55 +43,55 @@ it('should ignore repeated hits on the same place', () => {
 
 it('should know when it was sunk', () => {
   const horzShip = new Ship({ length: 2, pos: [0, 0] });
-  expect(horzShip.isSunk()).toBe(false);
+  expect(horzShip.isSunk).toBe(false);
   expect(horzShip.damage).toBe(0);
 
   horzShip.setDamage(0, 0);
-  expect(horzShip.isSunk()).toBe(false);
+  expect(horzShip.isSunk).toBe(false);
   expect(horzShip.damage).toBe(1);
 
   horzShip.setDamage(0, 0);
-  expect(horzShip.isSunk()).toBe(false);
+  expect(horzShip.isSunk).toBe(false);
   expect(horzShip.damage).toBe(1);
 
   horzShip.setDamage(0, 0);
-  expect(horzShip.isSunk()).toBe(false);
+  expect(horzShip.isSunk).toBe(false);
   expect(horzShip.damage).toBe(1);
 
   horzShip.setDamage(1, 0);
-  expect(horzShip.isSunk()).toBe(true);
+  expect(horzShip.isSunk).toBe(true);
   expect(horzShip.damage).toBe(2);
 
   const vertShip = new Ship({ length: 5, pos: [3, 4], vertical: true });
-  expect(vertShip.isSunk()).toBe(false);
+  expect(vertShip.isSunk).toBe(false);
   expect(vertShip.damage).toBe(0);
 
   vertShip.setDamage(3, 4);
-  expect(vertShip.isSunk()).toBe(false);
+  expect(vertShip.isSunk).toBe(false);
   expect(vertShip.damage).toBe(1);
 
   vertShip.setDamage(3, 4);
-  expect(vertShip.isSunk()).toBe(false);
+  expect(vertShip.isSunk).toBe(false);
   expect(vertShip.damage).toBe(1);
 
   vertShip.setDamage(3, 4);
-  expect(vertShip.isSunk()).toBe(false);
+  expect(vertShip.isSunk).toBe(false);
   expect(vertShip.damage).toBe(1);
 
   vertShip.setDamage(3, 5);
-  expect(vertShip.isSunk()).toBe(false);
+  expect(vertShip.isSunk).toBe(false);
   expect(vertShip.damage).toBe(2);
 
   vertShip.setDamage(3, 6);
-  expect(vertShip.isSunk()).toBe(false);
+  expect(vertShip.isSunk).toBe(false);
   expect(vertShip.damage).toBe(3);
 
   vertShip.setDamage(3, 7);
-  expect(vertShip.isSunk()).toBe(false);
+  expect(vertShip.isSunk).toBe(false);
   expect(vertShip.damage).toBe(4);
 
   vertShip.setDamage(3, 8);
-  expect(vertShip.isSunk()).toBe(true);
+  expect(vertShip.isSunk).toBe(true);
   expect(vertShip.damage).toBe(5);
 });
 

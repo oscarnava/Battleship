@@ -34,6 +34,7 @@ it('sould record an attack correcttly', () => {
 
   expect(ship.damage).toEqual(1);
   expect(gameboard.isHit(0, 0)).toBe(true);
+  expect(gameboard.isSunk(1, 0)).toBe(false);
 
   gameboard.receiveAttack(0, 1);
 
@@ -44,6 +45,8 @@ it('sould record an attack correcttly', () => {
 
   expect(ship.damage).toEqual(2);
   expect(gameboard.isHit(1, 0)).toBe(true);
+  expect(gameboard.isSunk(1, 0)).toBe(true);
+  expect(gameboard.isSunk(0, 0)).toBe(true);
 });
 
 it('Should detect when all ships have sunk', () => {
