@@ -9,7 +9,8 @@ export default class Player {
         && (y >= 0)
         && (x < this.gameboard.boardSize)
         && (y < this.gameboard.boardSize)
-        && this.gameboard.isHit(x, y);
+        && this.gameboard.isHit(x, y)
+        && !this.gameboard.isSunk(x, y);
 
     const target = moves.find(
       ({ x, y }) => hit(x - 1, y) || hit(x + 1, y) || hit(x, y - 1) || hit(x, y + 1),
