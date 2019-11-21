@@ -97,8 +97,8 @@ it('should know when it was sunk', () => {
 
 it('should return the coordinates of a ship', () => {
   const horzShip = new Ship({ length: 2, pos: [0, 0] });
-  expect(horzShip.getCoordinates()).toEqual([[0, 0], [1, 0]]);
+  expect(horzShip.coordinates).toEqual([[0, 0], [1, 0]]);
 
   const vertShip = new Ship({ length: 5, pos: [5, 5], vertical: true });
-  expect(vertShip.getCoordinates()).toEqual([[5, 5], [5, 6], [5, 7], [5, 8], [5, 9]]);
+  expect(vertShip.coordinates).toEqual([[5, 5], [5, 6], [5, 7], [5, 8], [5, 9]]);
 });

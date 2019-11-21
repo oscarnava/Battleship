@@ -11,7 +11,7 @@ export default class Ship {
     this._coord = null;
   }
 
-  getCoordinates() {
+  get coordinates() {
     if (!this._coord) {
       this._coord = [];
       for (let i = 0; i < this.length; i += 1) {
