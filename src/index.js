@@ -13,6 +13,8 @@ let computerDisplay;
 let draggedShip;
 let dragOpts;
 
+const gameOver = () => humanGame.allSunk() || computerGame.allSunk();
+
 const playMove = (x, y, graphBoard) => {
   const game = graphBoard.board;
   game.receiveAttack(x, y);
@@ -27,13 +29,25 @@ const playMove = (x, y, graphBoard) => {
   return false;
 };
 
-const executeMove = (x, y, cell, graphBoard) => {
+let locked = false;
+const computerMove = async () => {
+  const { x: cx, y: cy } = computer.getMove();
+  if (playMove(cx, cy, humanDisplay) && !gameOver()) {
+    setTimeout(computerMove, 2000);
+  } else {
+    locked = false;
+  }
+};
+
+const executeMove = async (x, y, cell, graphBoard) => {
+  if (locked || gameOver()) return;
+
   if (graphBoard.board.isValidMove(x, y)) {
+    locked = true;
     if (!playMove(x, y, graphBoard)) {
-      for (;;) {
-        const { x: cx, y: cy } = computer.getMove();
-        if (!playMove(cx, cy, humanDisplay)) break;
-      }
+      await setTimeout(computerMove, 1000);
+    } else {
+      locked = false;
     }
     humanDisplay.editMode = false;
   }

@@ -1,5 +1,5 @@
 const BOARD_SIZE = 10;
-const CELL_SIZE = 30;
+const CELL_SIZE = Math.floor(300 / BOARD_SIZE);
 const MARGIN = 3;
 const OCEAN_COLOR = '#065471';
 const GRID_COLOR = '#4b8e8d';

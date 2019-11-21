@@ -63,8 +63,12 @@ export default class Gameboard {
     return this.board[x][y] === SUNK;
   }
 
+  isHitOnly(x, y) {
+    return this.board[x][y] === HIT;
+  }
+
   isHit(x, y) {
-    return this.board[x][y] === HIT || this.isSunk(x, y);
+    return this.isHitOnly(x, y) || this.isSunk(x, y);
   }
 
   isMiss(x, y) {
@@ -96,6 +100,10 @@ export default class Gameboard {
 
   allSunk() {
     return !this.ships.find((ship) => !ship.isSunk);
+  }
+
+  shipsLeft() {
+    return this.ships.filter((ship) => !ship.isSunk).map((ship) => ship.length);
   }
 
   shuffleShips() {

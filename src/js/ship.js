@@ -44,12 +44,12 @@ export default class Ship {
   moveTo(x, y) {
     this.x = x;
     this.y = y;
-    this._coord = null;
+    return this.reset();
   }
 
   turn() {
     this.vertical = !this.vertical;
-    this._coord = null;
+    return this.reset();
   }
 
   reset() {
