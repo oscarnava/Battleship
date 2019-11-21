@@ -99,11 +99,12 @@ const turnShip = (x, y, ship, graphBoard) => {
 const setupGame = () => {
   humanGame = new Gameboard();
   computerGame = new Gameboard();
-  humanDisplay = new GraphicBoard(humanGame, 20, 20);
+  humanDisplay = new GraphicBoard(humanGame, 20, 20, 'Human');
   computerDisplay = new GraphicBoard(
     computerGame,
     humanDisplay.left + humanDisplay.size + 20,
     humanDisplay.top,
+    'Computer',
     true,
   );
 

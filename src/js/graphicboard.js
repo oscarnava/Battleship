@@ -33,11 +33,12 @@ const drawIcon = (icon, left, top, x, y) => {
 };
 
 export default class GraphicBoard {
-  constructor(board, left, top, blind = false) {
+  constructor(board, left, top, name = 'Human', blind = false) {
     this.board = board;
     this.left = left;
     this.top = top;
     this.blind = blind;
+    this.name = name;
     this.size = board.boardSize * config.CELL_SIZE;
     this.size = board.boardSize * config.CELL_SIZE;
     this.editMode = false;
@@ -121,14 +122,17 @@ export default class GraphicBoard {
     });
   }
 
-  drawGameOver() {
-    const msg = 'Game over';
-
-    ctx.fillStyle = 'red';
-    ctx.font = `bold ${config.CELL_SIZE * 1.5}px sans-serif`;
-
+  drawText(msg, opts) {
+    const { color = '#ee0000', size = 1.0, top = this.size / 2 } = opts;
+    ctx.fillStyle = color;
+    ctx.font = `bold ${config.CELL_SIZE * size}px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
     const { width, actualBoundingBoxAscent: heigth } = ctx.measureText(msg);
-    ctx.fillText('Game over', this.left + (this.size - width) / 2, this.top + (this.size + heigth) / 2);
+    ctx.fillText(msg, this.left + (this.size - width) / 2, this.top + top + heigth / 2);
+  }
+
+  drawGameOver() {
+    this.drawText('Game over', { size: 1.3, top: this.size * 0.8 });
+    this.drawText(`${this.name} lost!`, { color: '#ffff00', size: 0.7, top: this.size * 0.9 });
   }
 
   async draw() {
