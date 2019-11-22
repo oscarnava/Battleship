@@ -1,14 +1,5 @@
 import Ship from './ship';
 
-const logProbs = (probs) => {
-  const fmt = (n) => '0'.repeat(n < 16 ? 1 : 0) + n.toString(16);
-
-  console.clear();
-  for (let y = 0; y < probs.length; y += 1) {
-    console.log(probs[y].map(fmt).join('.'));
-  }
-};
-
 const evaluate = (ship, board, probs) => {
   const coord = ship.coordinates;
   // console.log(cord);
