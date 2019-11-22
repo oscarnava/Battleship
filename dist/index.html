@@ -22,6 +22,18 @@
     .main {
       margin: 0 2rem;
     }
+
+    label {
+      color: yellow;
+    }
+
+    p {
+      margin: 0;
+      padding: 0 2rem;
+      font-size: .8rem;
+      width: 600px;
+      color: yellowgreen;
+    }
   </style>
 </head>
 <body>
@@ -34,7 +46,13 @@
       <li>Toggle the ship's orientation by double clicking on it.</li>
       <li>Start the game by initiating attack by clicking on the computer's board.</li>
     </ul>
+    <div>
+      <input type="checkbox" id="debug">
+      <label for="debug">Watch me think!</label>
+      <p>When enabled, the board will show the calculated probabilities for a "good shot".</p>
+      <p>Darker color means bigger probability.</p>
+    </div>
   </div>
   <canvas id="canvas" width="1000" height="1000"></canvas>
-<script type="text/javascript" src="main.5fecaa8dfb2ddff6073f.js"></script></body>
+<script type="text/javascript" src="main.5f32e4435726c1daac54.js"></script></body>
 </html>
