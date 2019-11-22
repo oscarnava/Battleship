@@ -73,6 +73,8 @@ export default class Player {
       }
     }
 
+    this.gameboard.probs = probs;
+
     return moves.reduce((a, b) => (probs[a.y][a.x] > probs[b.y][b.x] ? a : b));
   }
 

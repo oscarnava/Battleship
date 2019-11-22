@@ -18,8 +18,8 @@ const gameOver = () => humanGame.allSunk() || computerGame.allSunk();
 const playMove = (x, y, graphBoard) => {
   const game = graphBoard.board;
   game.receiveAttack(x, y);
+  graphBoard.draw();
   if (game.isHit(x, y)) {
-    graphBoard.draw();
     playSound('explosion');
     return true;
   }
@@ -41,6 +41,8 @@ const computerMove = async () => {
 
 const executeMove = async (x, y, cell, graphBoard) => {
   if (locked || gameOver()) return;
+
+  humanDisplay.debugMode = document.querySelector('#debug').checked;
 
   if (graphBoard.board.isValidMove(x, y)) {
     locked = true;

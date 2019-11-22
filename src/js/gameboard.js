@@ -12,6 +12,7 @@ export default class Gameboard {
     this.ships = [];
     this.board = Array.from({ length: this.boardSize }, () => Array(this.boardSize).fill(WATER));
     this.validMoves = Array.from({ length: this.boardSize * this.boardSize }, (v, i) => i);
+    this.probs = null;
   }
 
   getCell(x, y) {

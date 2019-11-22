@@ -42,6 +42,7 @@ export default class GraphicBoard {
     this.size = board.boardSize * config.CELL_SIZE;
     this.size = board.boardSize * config.CELL_SIZE;
     this.editMode = false;
+    this.debugMode = false;
 
     let lastX = -1;
     let lastY = -1;
@@ -61,8 +62,35 @@ export default class GraphicBoard {
     canvas.addEventListener('mouseleave', () => { canvas.style.cursor = 'default'; });
   }
 
+  get debugging() {
+    return !!(this.debugMode && this.board && this.board.probs && !this.board.allSunk());
+  }
+
+  drawProbs() {
+    const { probs } = this.board;
+
+    const size = config.CELL_SIZE - 2 * config.MARGIN;
+    const maxWeight = probs.reduce((mx, row) => Math.max(mx, ...row), 0);
+
+    ctx.save();
+    ctx.fillStyle = '#01024e';
+    ctx.fillStyle = '#800000';
+
+    probs.forEach((row, y) => {
+      const top = this.top + y * config.CELL_SIZE + config.MARGIN;
+      row.forEach((weight, x) => {
+        const prob = weight / maxWeight;
+        const left = this.left + x * config.CELL_SIZE + config.MARGIN;
+        ctx.globalAlpha = prob;
+        ctx.fillRect(left, top, size, size);
+      });
+    });
+
+    ctx.restore();
+  }
+
   drawBoard() {
-    ctx.fillStyle = config.OCEAN_COLOR;
+    ctx.fillStyle = this.debugging ? 'white' : config.OCEAN_COLOR;
     ctx.fillRect(this.left, this.top, this.size, this.size);
 
     for (let i = config.CELL_SIZE; i < this.size; i += config.CELL_SIZE) {
@@ -112,7 +140,7 @@ export default class GraphicBoard {
 
   drawShips() {
     this.board.forEachShip((ship) => {
-      if (!this.blind || ship.isSunk) this.drawShip(ship);
+      if (!this.blind || ship.isSunk) this.drawShip(ship, this.debugging ? 0.5 : 1.0);
     });
   }
 
@@ -138,6 +166,7 @@ export default class GraphicBoard {
   async draw() {
     this.drawBoard();
     if (!boatImages) boatImages = await loadBoats();
+    if (this.debugging) this.drawProbs();
     this.drawShips();
     this.drawMoves();
     if (this.board.allSunk()) {
