@@ -1,4 +1,7 @@
-const BOARD_SIZE = 6; // 6 ~ 16
+const urlParams = new URLSearchParams(window.location.search);
+const size = +urlParams.get('boardsize');
+
+const BOARD_SIZE = size >= 6 && size <= 16 ? size : 10; // 6 ~ 16
 const CELL_SIZE = Math.floor(400 / BOARD_SIZE);
 const MARGIN = 3;
 const OCEAN_COLOR = '#065471';
