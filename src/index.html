@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Battleships</title>
+  <style>
+      * {
+        box-sizing: border-box;
+      }
+
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #022c43;
+      color: white;
+      font-size: 16px;
+    }
+
+    .main {
+      margin: 0 2rem;
+    }
+
+    label {
+      color: yellow;
+    }
+
+    p {
+      margin: 0;
+      padding: 0 2rem;
+      font-size: .8rem;
+      width: 600px;
+      color: yellowgreen;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <h1>Battleships</h1>
+    <h2>Instructions:</h2>
+    <ul>
+      <li>Left grid is the user's board and right grid is the computer's board</li>
+      <li>You can edit your ships distribution by dragging them around.</li>
+      <li>Toggle the ship's orientation by double clicking on it.</li>
+      <li>Start the game by initiating attack by clicking on the computer's board.</li>
+    </ul>
+    <div>
+      <input type="checkbox" id="debug">
+      <label for="debug">Watch me think!</label>
+      <p>When enabled, the board will show the calculated probabilities for a "good shot".</p>
+      <p>Darker color means bigger probability.</p>
+    </div>
+  </div>
+  <canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
