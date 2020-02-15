@@ -25,7 +25,7 @@ export default class Gameboard {
 
   getStrategicMove(strategyFn) {
     const validMoves = this.validMoves
-      .map((position) => (
+      .map(position => (
         { x: position % this.boardSize, y: Math.floor(position / this.boardSize) }
       ));
     return strategyFn(validMoves);
@@ -53,7 +53,7 @@ export default class Gameboard {
     ship.coordinates.forEach(([x, y]) => {
       this.board[x][y] = WATER;
     });
-    this.ships = this.ships.filter((sh) => sh !== ship);
+    this.ships = this.ships.filter(sh => sh !== ship);
   }
 
   isWater(x, y) {
@@ -96,15 +96,15 @@ export default class Gameboard {
     } else {
       this.board[x][y] = MISS;
     }
-    this.validMoves = this.validMoves.filter((pos) => pos !== y * this.boardSize + x);
+    this.validMoves = this.validMoves.filter(pos => pos !== y * this.boardSize + x);
   }
 
   allSunk() {
-    return !this.ships.find((ship) => !ship.isSunk);
+    return !this.ships.find(ship => !ship.isSunk);
   }
 
   shipsLeft() {
-    return this.ships.filter((ship) => !ship.isSunk).map((ship) => ship.length);
+    return this.ships.filter(ship => !ship.isSunk).map(ship => ship.length);
   }
 
   shuffleShips() {
