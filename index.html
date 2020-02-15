@@ -13,14 +13,10 @@
     body{
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 2rem;
       background-color: #022c43;
       color: white;
       font-size: 16px;
-    }
-
-    .main {
-      margin: 0 2rem;
     }
 
     label {
@@ -34,25 +30,60 @@
       width: 600px;
       color: yellowgreen;
     }
+
+    a {
+      color: rgb(8, 34, 34);
+      background-color: #4b8e8d;
+      border: solid 2px #065471;
+      padding: 10px;
+      margin: 5px 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .play-level {
+      margin: 2em 15px;
+    }
+
+    .viewbox {
+      width: 860px;
+      margin: 10px auto;
+    }
+
   </style>
 </head>
 <body>
-  <div class="main">
-    <h1>Battleships</h1>
-    <h2>Instructions:</h2>
-    <ul>
-      <li>Left grid is the user's board and right grid is the computer's board</li>
-      <li>You can edit your ships distribution by dragging them around.</li>
-      <li>Toggle the ship's orientation by double clicking on it.</li>
-      <li>Start the game by initiating attack by clicking on the computer's board.</li>
-    </ul>
-    <div>
-      <input type="checkbox" id="debug">
-      <label for="debug">Watch me think!</label>
-      <p>When enabled, the board will show the calculated probabilities for a "good shot".</p>
-      <p>Darker color means bigger probability.</p>
-    </div>
+  <div class="viewbox">
+    <header>
+      <h1>Battleships</h1>
+      <h2>Instructions:</h2>
+    </header>
+    <main>
+      <ul>
+        <li>Left grid is the user's board and right grid is the computer's board</li>
+        <li>You can edit your ships distribution by dragging them around.</li>
+        <li>Toggle the ship's orientation by double clicking on it.</li>
+        <li>Start the game by initiating attack by clicking on the computer's board.</li>
+      </ul>
+
+      <div class="play-level">
+        Select play level:
+        <a href="?boardsize=6">Easy</a>
+        <a href="?boardsize=10">Normal</a>
+        <a href="?boardsize=16">Hard</a>
+      </div>
+
+      <div>
+        <input type="checkbox" id="debug">
+        <label for="debug">Watch me think!</label>
+        <p>When enabled, the board will show the calculated probabilities for a "good shot".</p>
+        <p>Darker color means bigger probability.</p>
+      </div>
+
+      <canvas id="canvas" width="850" height="440"></canvas>
+
+    </main>
   </div>
-  <canvas id="canvas" width="1000" height="1000"></canvas>
-<script type="text/javascript" src="main.3ac3042b6631a93cbfdd.js"></script></body>
+<script type="text/javascript" src="main.934491f12f7e23061a1a.js"></script></body>
 </html>
