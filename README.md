@@ -10,7 +10,13 @@ You can even watch in real-time the strategy that the computer is using at that 
 ##### [👀 Click here for a live preview](https://oscarnava.me/battleships/)
 
 ---
+## 🛠 Built with:
+- HTML
+- SASS *(I like indentation based languages)*
+- Javascript
+- ☕ Lots of coffee...
 
+---
 ## 👤 Contributors
 
 - [Oscar Nava](https://github.com/oscarnava) 📧 contact@oscarnava.me
@@ -50,3 +56,11 @@ Enter on the command line:
 
 - Improve use in small screen devices.
 - ~~Create different levels of difficulty.~~
+
+## 📦 Contributing
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/oscarnava/Battleship/issues).
+
+## 🗝 License
+Creative Commons [Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
