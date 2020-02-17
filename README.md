@@ -1,14 +1,13 @@
 # 🚢Battle Ships Game
 
+[<img src="docs/board.png" align="left" width="30%">](https://oscarnava.me/battleships/)
 A browser-based version of the board game [Battle Ships](https://en.wikipedia.org/wiki/Battleship_(game)). The game starts with your ships on the board, the number depending on the selected level of difficulty. You can drag them around using the mouse, and double-click to turn it by 90°. Once you are satisfied with your distribution, start the game by initiating an attack by clicking over any empty cell on the computer board.
 
-[<img src="docs/board.png" align="center">](https://oscarnava.me/battleships/)
-
+### Watch me think!
+[<img src="docs/thinking.png" align="right" width="30%">](https://oscarnava.me/battleships/)
 You can even watch in real-time the strategy that the computer is using at that moment. Dark red cells are those where the computer thinks it's more probable to find a ship, and the lighter or white ones are where she thinks it's less probable to hit a ship.
 
-[<img src="docs/thinking.png" align="center">](https://oscarnava.me/battleships/)
-
-##### 👀[Click here for a live preview](https://oscarnava.me/battleships/)
+##### [👀 Click here for a live preview](https://oscarnava.me/battleships/)
 
 ---
 
