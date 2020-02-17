@@ -21,5 +21,8 @@ module.exports = {
     "eol-last": 0,
     "object-curly-newline": 0,
     "no-underscore-dangle": 0,
+  },
+  devDependencies: {
+    "serialize-javascript": ">=2.1.1"
   }
 };
