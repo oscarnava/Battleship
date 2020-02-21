@@ -70,4 +70,4 @@ Creative Commons [Attribution 4.0 International (CC BY 4.0)](https://creativecom
 
 ## 📡 Contact
 
-Please don't hesitate to contact me at 📧 [contact@oscarnava.me](contact@oscarnava.me) if you have any questions, comments, etc. I would love to know what's on your mind!
+Please don't hesitate to contact me at 📧 [contact@oscarnava.me](mailto:contact@oscarnava.me) if you have any questions, comments, etc. I would love to know what's on your mind!
