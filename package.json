@@ -29,6 +29,6 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
     "webpack-html-plugin": "^0.1.1",
-    "cli": ">=1.0.0"
+    "cli": ">=1.0.1"
   }
 }
